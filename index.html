@@ -3,30 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website Audit — Oak & Wills Estate Law</title>
+<title>Oak & Wills Estate Law — Website Audit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
-/* Macrostructure: Split Studio · Design Direction: Minimalist Editorial */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Macrostructure: Narrative Workflow · Direction: Minimalist Editorial */
+/* Design Read: Trust-first legal audit for estate planning firm owner,
+   warm serif language, DM Serif Display + Inter, gold accent on cream */
 
 :root {
   --bg: #faf9f6;
   --surface: #ffffff;
+  --surface-warm: #f5f3ee;
   --ink: #1a1a2e;
-  --ink-dim: #4a4a5a;
-  --ink-mut: #8a8a9a;
+  --ink-dim: #5a5a6a;
+  --ink-mut: #9a9aaa;
   --accent: #c9a961;
+  --accent-light: #e8dcc0;
   --accent-ink: #1a1a2e;
-  --danger: #c44;
-  --danger-bg: #fef2f2;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
   --danger-border: #fecaca;
-  --success: #16a34a;
-  --success-bg: #f0fdf4;
+  --success: #15803d;
+  --success-soft: #f0fdf4;
   --border: #e8e6e0;
-  --radius: 4px;
+  --border-light: #f0ede6;
+  --radius: 6px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(26,26,46,0.06);
+  --shadow-md: 0 4px 16px rgba(26,26,46,0.08);
+  --shadow-lg: 0 8px 32px rgba(26,26,46,0.1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,372 +47,662 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* === ANIMATIONS === */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* === TOPBAR === */
 .topbar {
   background: var(--ink);
-  color: rgba(245,240,235,0.5);
-  padding: 10px 20px;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
-.topbar .brand { color: var(--accent); font-weight: 600; }
+.topbar .conf { color: rgba(245,240,235,0.4); }
+.topbar .firm { color: var(--accent); font-weight: 600; }
+
+/* === NAV STRIP === */
+.nav-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 24px;
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-mut);
+  overflow-x: auto;
+}
+.nav-strip a {
+  color: var(--ink-mut);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.nav-strip a:hover { color: var(--accent); }
 
 /* === HERO === */
 .hero {
-  padding: 56px 20px 40px;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
+  padding: 56px 24px 40px;
 }
-.hero-firm {
+.hero-eyebrow {
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 12px;
   font-weight: 600;
+  margin-bottom: 16px;
 }
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(26px, 5vw, 38px);
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 400;
-  line-height: 1.2;
-  color: var(--ink);
-  margin-bottom: 12px;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
 }
-.hero h1 strong { color: var(--danger); font-weight: 400; }
-.hero p {
-  font-size: 15px;
+.hero h1 em {
+  font-style: normal;
+  color: var(--danger);
+}
+.hero-sub {
+  font-size: 16px;
   color: var(--ink-dim);
-  max-width: 460px;
+  max-width: 500px;
   line-height: 1.7;
 }
 
-/* === SCORE === */
-.score-row {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  max-width: 640px;
+/* === SCORE SECTION === */
+.score-section {
+  max-width: 680px;
   margin: 0 auto;
-  padding: 24px 20px 40px;
+  padding: 24px 24px 48px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
   flex-wrap: wrap;
 }
-.ring-wrap {
+.ring-container {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   flex-shrink: 0;
 }
-.ring-wrap svg { width: 140px; height: 140px; transform: rotate(-90deg); }
-.ring-bg { fill: none; stroke: var(--border); stroke-width: 6; }
-.ring-fill {
+.ring-container svg { width: 160px; height: 160px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--border); stroke-width: 6; }
+.ring-value {
   fill: none;
   stroke: var(--danger);
   stroke-width: 6;
   stroke-linecap: round;
   stroke-dasharray: 377;
   stroke-dashoffset: 264;
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.ring-num {
+.ring-number {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: 48px;
   color: var(--danger);
+  line-height: 1;
 }
-.ring-sub {
+.ring-label {
   position: absolute;
-  bottom: 22px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   color: var(--ink-mut);
 }
-.score-text { flex: 1; min-width: 200px; }
-.score-text h3 {
+.score-detail { flex: 1; min-width: 220px; }
+.score-detail h3 {
   font-family: var(--font-display);
-  font-size: 18px;
-  margin-bottom: 6px;
+  font-size: 20px;
   font-weight: 400;
+  margin-bottom: 8px;
 }
-.score-text p {
-  font-size: 13px;
+.score-detail p {
+  font-size: 14px;
   color: var(--ink-dim);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 12px;
 }
-.pill {
-  display: inline-block;
-  padding: 3px 10px;
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
   border-radius: 100px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.3px;
-  margin-top: 6px;
 }
-.pill-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); }
+.tag-danger { background: var(--danger-soft); color: var(--danger); border: 1px solid var(--danger-border); }
+
+/* === METRIC BAR === */
+.metric-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.metric { text-align: center; }
+.metric .val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1;
+}
+.metric .lbl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-mut);
+  margin-top: 4px;
+}
 
 /* === ISSUES === */
 .issues {
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 0 20px 40px;
+  padding: 48px 24px;
 }
-.sec-label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--ink-mut);
-  font-weight: 600;
-  margin-bottom: 16px;
-  padding-bottom: 6px;
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
 }
-.issue {
+.section-head .num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--accent);
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+}
+.issue-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 8px;
+  padding: 20px 24px;
+  margin-bottom: 10px;
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: flex-start;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
 }
-.issue:hover { border-color: var(--accent); }
-.issue-n {
+.issue-card:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-sm);
+}
+.issue-num {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 24px;
   color: var(--accent);
   line-height: 1;
-  min-width: 24px;
-  padding-top: 1px;
+  min-width: 28px;
+  padding-top: 2px;
+  flex-shrink: 0;
 }
-.issue h4 {
-  font-size: 14px;
+.issue-body { flex: 1; }
+.issue-body h4 {
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+  color: var(--ink);
 }
-.issue p {
-  font-size: 12px;
+.issue-body .evidence {
+  font-size: 13px;
   color: var(--ink-dim);
-  line-height: 1.5;
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
-.issue .fix {
-  display: block;
-  margin-top: 6px;
-  font-size: 11px;
+.issue-body .fix-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--success-soft);
+  border-radius: var(--radius);
+  border: 1px solid #bbf7d0;
+}
+.issue-body .fix-icon {
+  width: 18px;
+  height: 18px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.issue-body .fix-icon svg {
+  width: 10px;
+  height: 10px;
+}
+.issue-body .fix-text {
+  font-size: 12px;
   color: var(--success);
   font-weight: 600;
 }
-.issue .fix::before { content: '→ '; }
 
-/* === COST === */
-.cost-bar {
+/* === BEFORE/AFTER MOCKUP === */
+.mockup-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+.mockup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .mockup-grid { grid-template-columns: 1fr; }
+}
+.mockup-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.mockup-label {
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.mockup-label.before { color: var(--danger); background: var(--danger-soft); }
+.mockup-label.after { color: var(--success); background: var(--success-soft); }
+.mockup-content {
+  padding: 16px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-dim);
+  min-height: 180px;
+}
+.mockup-content .mock-heading {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.mockup-content .mock-btn {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.mock-btn.off { background: var(--border); color: var(--ink-mut); }
+.mock-btn.on { background: var(--accent); color: var(--accent-ink); }
+.mockup-content .mock-phone {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 6px;
+}
+.mockup-content .mock-trust {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.mockup-content .mock-badge {
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--ink-dim);
+}
+.mock-badge.active { border-color: var(--accent); color: var(--accent); background: rgba(201,169,97,0.08); }
+
+/* === IMPACT === */
+.impact {
   background: var(--ink);
   color: rgba(245,240,235,0.9);
-  padding: 36px 20px;
+  padding: 56px 24px;
   text-align: center;
 }
-.cost-bar h2 {
+.impact h2 {
   font-family: var(--font-display);
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(22px, 4vw, 32px);
   font-weight: 400;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.cost-bar .sub {
-  font-size: 13px;
+.impact .sub {
+  font-size: 14px;
   color: rgba(245,240,235,0.5);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
-.cost-nums {
+.impact-grid {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
+  max-width: 560px;
+  margin: 0 auto;
 }
-.cost-nums .num {
+.impact-card {
+  padding: 24px 20px;
+  border: 1px solid rgba(201,169,97,0.25);
+  border-radius: var(--radius);
+  min-width: 140px;
+  transition: border-color 0.3s;
+}
+.impact-card:hover { border-color: var(--accent); }
+.impact-card .num {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 36px;
   color: var(--accent);
   line-height: 1;
+  margin-bottom: 6px;
 }
-.cost-nums .lbl {
-  font-size: 10px;
+.impact-card .lbl {
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgba(245,240,235,0.4);
-  margin-top: 4px;
+  color: rgba(245,240,235,0.45);
 }
 
 /* === CTA === */
 .cta {
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 56px 20px 64px;
+  padding: 64px 24px 80px;
   text-align: center;
 }
 .cta h2 {
   font-family: var(--font-display);
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(22px, 4vw, 30px);
   font-weight: 400;
   margin-bottom: 10px;
 }
 .cta p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink-dim);
-  max-width: 400px;
-  margin: 0 auto 24px;
-  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
 }
 .cta-btn {
   display: inline-block;
   background: var(--accent);
   color: var(--accent-ink);
-  padding: 12px 32px;
+  padding: 14px 40px;
   border-radius: var(--radius);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
 }
-.cta-btn:hover { background: #b8984d; }
+.cta-btn:hover {
+  background: #b8984d;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.cta-btn:active { transform: translateY(0); }
 .cta-note {
-  margin-top: 12px;
-  font-size: 11px;
+  margin-top: 14px;
+  font-size: 12px;
   color: var(--ink-mut);
-  font-style: italic;
 }
 
 .footer {
   border-top: 1px solid var(--border);
-  padding: 16px 20px;
+  padding: 20px 24px;
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ink-mut);
-  letter-spacing: 0.5px;
 }
 
+/* === MOBILE === */
 @media (max-width: 600px) {
-  .score-row { gap: 20px; }
-  .issue { flex-direction: column; gap: 6px; }
-  .cost-nums { gap: 24px; }
+  .score-section { flex-direction: column; gap: 24px; text-align: center; }
+  .issue-card { flex-direction: column; gap: 8px; }
+  .metric-bar { gap: 24px; }
+  .nav-strip { display: none; }
 }
 </style>
 </head>
 <body>
 
+<!-- Topbar -->
 <div class="topbar">
-  <span>Confidential Audit</span>
-  <span class="brand">Oak & Wills Estate Law · Dallas</span>
+  <span class="conf">Confidential Website Audit</span>
+  <span class="firm">Oak & Wills Estate Law · Dallas, TX</span>
 </div>
 
-<div class="hero">
-  <div class="hero-firm">Prepared for Oak & Wills</div>
-  <h1>Your website has <strong>5 issues</strong> costing you estate planning clients</h1>
-  <p>Each one is pushing potential clients to your competitors. All fixable in under a week.</p>
+<!-- Nav -->
+<nav class="nav-strip">
+  <a href="#score">Score</a>
+  <a href="#issues">Issues</a>
+  <a href="#preview">Preview</a>
+  <a href="#impact">Impact</a>
+  <a href="#action">Next Steps</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero reveal" id="hero">
+  <div class="hero-eyebrow">Prepared for Oak & Wills Estate Law</div>
+  <h1>Your website is <em>losing you 4 to 6 estate planning clients every month</em></h1>
+  <p class="hero-sub">We found 5 specific issues driving visitors to your competitors. Each is fixable in under a week. Here's exactly what to fix and why.</p>
 </div>
 
-<div class="score-row">
-  <div class="ring-wrap">
+<!-- Score -->
+<div class="score-section reveal" id="score">
+  <div class="ring-container">
     <svg viewBox="0 0 140 140">
-      <circle class="ring-bg" cx="70" cy="70" r="60"/>
-      <circle class="ring-fill" cx="70" cy="70" r="60"/>
+      <circle class="ring-track" cx="70" cy="70" r="60"/>
+      <circle class="ring-value" cx="70" cy="70" r="60"/>
     </svg>
-    <div class="ring-num">30</div>
-    <div class="ring-sub">of 100</div>
+    <div class="ring-number">30</div>
+    <div class="ring-label">of 100</div>
   </div>
-  <div class="score-text">
-    <h3>Trust & Conversion Score</h3>
-    <p>Your site scores in the bottom 30% for estate planning firms in Dallas. The average firm scoring below 50 loses 60% of visitors before they reach your contact page.</p>
-    <span class="pill pill-danger">Below industry average</span>
+  <div class="score-detail">
+    <h3>Trust and Conversion Score</h3>
+    <p>Your site scores in the bottom 30% of Dallas estate planning firms. Visitors who land on your homepage have a 60% higher chance of leaving without contacting you compared to your top 3 competitors.</p>
+    <span class="tag tag-danger">Needs immediate attention</span>
   </div>
 </div>
 
-<div class="issues">
-  <div class="sec-label">What's Driving Visitors Away</div>
+<!-- Metric Bar -->
+<div class="metric-bar reveal">
+  <div class="metric">
+    <div class="val">4-6</div>
+    <div class="lbl">Lost clients / month</div>
+  </div>
+  <div class="metric">
+    <div class="val">$3K+</div>
+    <div class="lbl">Revenue left on table</div>
+  </div>
+  <div class="metric">
+    <div class="val">5</div>
+    <div class="lbl">Issues found</div>
+  </div>
+  <div class="metric">
+    <div class="val">7 days</div>
+    <div class="lbl">To fix everything</div>
+  </div>
+</div>
 
-  <div class="issue">
-    <div class="issue-n">01</div>
-    <div>
-      <h4>No booking link anywhere on the site</h4>
-      <p>A visitor ready to schedule a consultation has no way to do it instantly. They must call during business hours or fill out a buried form. Most won't.</p>
-      <span class="fix">Add Cal.com booking — takes 10 minutes, free forever</span>
+<!-- Issues -->
+<div class="issues" id="issues">
+  <div class="section-head reveal">
+    <span class="num">01</span>
+    <h2>What's Driving Visitors Away</h2>
+  </div>
+
+  <div class="issue-card reveal">
+    <div class="issue-num">01</div>
+    <div class="issue-body">
+      <h4>No booking link anywhere on your site</h4>
+      <div class="evidence">A visitor ready to schedule a consultation has no way to do it instantly. They must call during business hours or find a buried contact form. Most will go to a competitor who lets them book in two clicks.</div>
+      <div class="fix-row">
+        <div class="fix-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <span class="fix-text">Add Cal.com booking widget, free, 10 minute setup</span>
+      </div>
     </div>
   </div>
 
-  <div class="issue">
-    <div class="issue-n">02</div>
-    <div>
+  <div class="issue-card reveal reveal-delay-1">
+    <div class="issue-num">02</div>
+    <div class="issue-body">
       <h4>Phone number missing from homepage</h4>
-      <p>Estate planning is trust-critical. Visitors need to see a real phone number above the fold. Its absence signals "not a real practice."</p>
-      <span class="fix">Add phone in header — one line of code</span>
+      <div class="evidence">Estate planning is built on trust. Visitors need to see a real phone number above the fold. Its absence signals "not a real practice" to the exact demographic most likely to need your services.</div>
+      <div class="fix-row">
+        <div class="fix-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <span class="fix-text">Add phone in header, one line of code</span>
+      </div>
     </div>
   </div>
 
-  <div class="issue">
-    <div class="issue-n">03</div>
-    <div>
+  <div class="issue-card reveal reveal-delay-2">
+    <div class="issue-num">03</div>
+    <div class="issue-body">
       <h4>Blog last updated in 2023</h4>
-      <p>Your most recent content is 3 years old. Visitors assume you've stopped practicing or aren't attentive — a dealbreaker for someone managing their estate.</p>
-      <span class="fix">Update 2 posts with current Texas estate law changes</span>
+      <div class="evidence">Your most recent content is 3 years old. Visitors assume you've stopped practicing or aren't attentive to detail. For someone choosing who manages their estate, that's a dealbreaker.</div>
+      <div class="fix-row">
+        <div class="fix-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <span class="fix-text">Update 2 posts with current Texas estate law changes</span>
+      </div>
     </div>
   </div>
 
-  <div class="issue">
-    <div class="issue-n">04</div>
-    <div>
+  <div class="issue-card reveal">
+    <div class="issue-num">04</div>
+    <div class="issue-body">
       <h4>No testimonials or trust badges</h4>
-      <p>No Avvo rating. No State Bar badge. No client reviews. Your competitors show all three above the fold. You show none.</p>
-      <span class="fix">Add 3 testimonials + your Avvo and State Bar badges</span>
+      <div class="evidence">No Avvo rating. No State Bar badge. No client reviews visible. Your top 3 Dallas competitors all show trust signals above the fold. You show none.</div>
+      <div class="fix-row">
+        <div class="fix-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <span class="fix-text">Add 3 testimonials and your professional badges</span>
+      </div>
     </div>
   </div>
 
-  <div class="issue">
-    <div class="issue-n">05</div>
-    <div>
+  <div class="issue-card reveal reveal-delay-1">
+    <div class="issue-num">05</div>
+    <div class="issue-body">
       <h4>Missing H1 heading on homepage</h4>
-      <p>Search engines can't figure out what your page is about. You're invisible on Google for "estate planning lawyer Dallas" — a keyword with 1,300 monthly searches.</p>
-      <span class="fix">Add H1: "Estate Planning & Probate Attorney in Dallas, TX"</span>
+      <div class="evidence">Search engines can't determine what your page is about. You're invisible on Google for "estate planning lawyer Dallas," a keyword with 1,300 monthly searches and high purchase intent.</div>
+      <div class="fix-row">
+        <div class="fix-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <span class="fix-text">Add H1: "Estate Planning Attorney in Dallas, TX"</span>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="cost-bar">
-  <h2>What This Is Costing Oak & Wills</h2>
+<!-- Before/After -->
+<div class="mockup-section" id="preview">
+  <div class="section-head reveal">
+    <span class="num">02</span>
+    <h2>What The Fix Looks Like</h2>
+  </div>
+
+  <div class="mockup-grid reveal">
+    <div class="mockup-card">
+      <div class="mockup-label before">Your Homepage Now</div>
+      <div class="mockup-content">
+        <div class="mock-heading">Oak & Wills Estate Law</div>
+        <p>Experienced estate planning attorneys serving the Dallas area since 2008...</p>
+        <p style="margin-top:8px; color:var(--ink-mut);">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        <span class="mock-btn off">Contact Us</span>
+        <p style="margin-top:12px;color:var(--danger);font-size:11px;font-weight:600;">No phone. No booking. No trust signals.</p>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="mockup-label after">After The Fix</div>
+      <div class="mockup-content">
+        <div class="mock-heading">Estate Planning Attorney in Dallas, TX</div>
+        <p class="mock-phone">📞 (214) 555-0187</p>
+        <div class="mock-trust">
+          <span class="mock-badge active">Avvo 10.0</span>
+          <span class="mock-badge active">State Bar of TX</span>
+          <span class="mock-badge active">4.9 ★ Google</span>
+        </div>
+        <span class="mock-btn on" style="margin-top:12px;">Book Free Consultation</span>
+        <p style="margin-top:10px;color:var(--success);font-size:11px;font-weight:600;">Phone, booking, trust, H1 all in place.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Impact -->
+<div class="impact reveal" id="impact">
+  <h2>What This Is Costing Oak and Wills</h2>
   <p class="sub">Conservative estimate based on Dallas estate planning benchmarks</p>
-  <div class="cost-nums">
-    <div>
+  <div class="impact-grid">
+    <div class="impact-card">
       <div class="num">4-6</div>
-      <div class="lbl">Lost consults / month</div>
+      <div class="lbl">Lost consults per month</div>
     </div>
-    <div>
+    <div class="impact-card">
       <div class="num">$3K+</div>
-      <div class="lbl">Revenue left on table</div>
+      <div class="lbl">Monthly revenue missed</div>
     </div>
-    <div>
+    <div class="impact-card">
       <div class="num">7 days</div>
       <div class="lbl">To fix everything</div>
     </div>
   </div>
 </div>
 
-<div class="cta">
-  <h2>Want the full fix?</h2>
-  <p>I can implement every recommendation above in 7 days. Reply to the email and I'll send you the plan.</p>
-  <a href="mailto:brave.sharon@gmail.com?subject=Send%20me%20the%20fix%20for%20Oak%20%26%20Wills" class="cta-btn">Reply "send me the fix"</a>
-  <p class="cta-note">Free. No obligation. Just a reply.</p>
+<!-- CTA -->
+<div class="cta reveal" id="action">
+  <h2>Ready to fix this?</h2>
+  <p>I can implement every recommendation above in 7 days. No redesign needed. Just targeted fixes that turn your existing traffic into booked consultations.</p>
+  <a href="mailto:brave.sharon@gmail.com?subject=Fix%20my%20site" class="cta-btn">Reply to the email</a>
+  <p class="cta-note">Free. No obligation. Just reply and I'll send the plan.</p>
 </div>
 
+<!-- Footer -->
 <div class="footer">
   Prepared by Sharon Lijo · brave.sharon@gmail.com
 </div>
+
+<script>
+// IntersectionObserver for scroll reveals
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Hero visible immediately
+document.getElementById('hero').classList.add('visible');
+</script>
 
 </body>
 </html>
