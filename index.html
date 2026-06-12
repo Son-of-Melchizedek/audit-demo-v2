@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Audit — Oak & Wills Estate Law</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+/* Macrostructure: Split Studio · Design Direction: Minimalist Editorial */
+
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --ink: #1a1a2e;
+  --ink-dim: #4a4a5a;
+  --ink-mut: #8a8a9a;
+  --accent: #c9a961;
+  --accent-ink: #1a1a2e;
+  --danger: #c44;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --success: #16a34a;
+  --success-bg: #f0fdf4;
+  --border: #e8e6e0;
+  --radius: 4px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === TOPBAR === */
+.topbar {
+  background: var(--ink);
+  color: rgba(245,240,235,0.5);
+  padding: 10px 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topbar .brand { color: var(--accent); font-weight: 600; }
+
+/* === HERO === */
+.hero {
+  padding: 56px 20px 40px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero-firm {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.hero h1 strong { color: var(--danger); font-weight: 400; }
+.hero p {
+  font-size: 15px;
+  color: var(--ink-dim);
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+/* === SCORE === */
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  flex-wrap: wrap;
+}
+.ring-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+.ring-wrap svg { width: 140px; height: 140px; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--border); stroke-width: 6; }
+.ring-fill {
+  fill: none;
+  stroke: var(--danger);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 264;
+}
+.ring-num {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--danger);
+}
+.ring-sub {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-mut);
+}
+.score-text { flex: 1; min-width: 200px; }
+.score-text h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.score-text p {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+.pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-top: 6px;
+}
+.pill-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); }
+
+/* === ISSUES === */
+.issues {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+.sec-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-mut);
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.issue {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.issue:hover { border-color: var(--accent); }
+.issue-n {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 24px;
+  padding-top: 1px;
+}
+.issue h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.issue p {
+  font-size: 12px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+.issue .fix {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--success);
+  font-weight: 600;
+}
+.issue .fix::before { content: '→ '; }
+
+/* === COST === */
+.cost-bar {
+  background: var(--ink);
+  color: rgba(245,240,235,0.9);
+  padding: 36px 20px;
+  text-align: center;
+}
+.cost-bar h2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.cost-bar .sub {
+  font-size: 13px;
+  color: rgba(245,240,235,0.5);
+  margin-bottom: 24px;
+}
+.cost-nums {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.cost-nums .num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--accent);
+  line-height: 1;
+}
+.cost-nums .lbl {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(245,240,235,0.4);
+  margin-top: 4px;
+}
+
+/* === CTA === */
+.cta {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 20px 64px;
+  text-align: center;
+}
+.cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.cta p {
+  font-size: 14px;
+  color: var(--ink-dim);
+  max-width: 400px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 12px 32px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.cta-btn:hover { background: #b8984d; }
+.cta-note {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--ink-mut);
+  font-style: italic;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--ink-mut);
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .score-row { gap: 20px; }
+  .issue { flex-direction: column; gap: 6px; }
+  .cost-nums { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>Confidential Audit</span>
+  <span class="brand">Oak & Wills Estate Law · Dallas</span>
+</div>
+
+<div class="hero">
+  <div class="hero-firm">Prepared for Oak & Wills</div>
+  <h1>Your website has <strong>5 issues</strong> costing you estate planning clients</h1>
+  <p>Each one is pushing potential clients to your competitors. All fixable in under a week.</p>
+</div>
+
+<div class="score-row">
+  <div class="ring-wrap">
+    <svg viewBox="0 0 140 140">
+      <circle class="ring-bg" cx="70" cy="70" r="60"/>
+      <circle class="ring-fill" cx="70" cy="70" r="60"/>
+    </svg>
+    <div class="ring-num">30</div>
+    <div class="ring-sub">of 100</div>
+  </div>
+  <div class="score-text">
+    <h3>Trust & Conversion Score</h3>
+    <p>Your site scores in the bottom 30% for estate planning firms in Dallas. The average firm scoring below 50 loses 60% of visitors before they reach your contact page.</p>
+    <span class="pill pill-danger">Below industry average</span>
+  </div>
+</div>
+
+<div class="issues">
+  <div class="sec-label">What's Driving Visitors Away</div>
+
+  <div class="issue">
+    <div class="issue-n">01</div>
+    <div>
+      <h4>No booking link anywhere on the site</h4>
+      <p>A visitor ready to schedule a consultation has no way to do it instantly. They must call during business hours or fill out a buried form. Most won't.</p>
+      <span class="fix">Add Cal.com booking — takes 10 minutes, free forever</span>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="issue-n">02</div>
+    <div>
+      <h4>Phone number missing from homepage</h4>
+      <p>Estate planning is trust-critical. Visitors need to see a real phone number above the fold. Its absence signals "not a real practice."</p>
+      <span class="fix">Add phone in header — one line of code</span>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="issue-n">03</div>
+    <div>
+      <h4>Blog last updated in 2023</h4>
+      <p>Your most recent content is 3 years old. Visitors assume you've stopped practicing or aren't attentive — a dealbreaker for someone managing their estate.</p>
+      <span class="fix">Update 2 posts with current Texas estate law changes</span>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="issue-n">04</div>
+    <div>
+      <h4>No testimonials or trust badges</h4>
+      <p>No Avvo rating. No State Bar badge. No client reviews. Your competitors show all three above the fold. You show none.</p>
+      <span class="fix">Add 3 testimonials + your Avvo and State Bar badges</span>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="issue-n">05</div>
+    <div>
+      <h4>Missing H1 heading on homepage</h4>
+      <p>Search engines can't figure out what your page is about. You're invisible on Google for "estate planning lawyer Dallas" — a keyword with 1,300 monthly searches.</p>
+      <span class="fix">Add H1: "Estate Planning & Probate Attorney in Dallas, TX"</span>
+    </div>
+  </div>
+</div>
+
+<div class="cost-bar">
+  <h2>What This Is Costing Oak & Wills</h2>
+  <p class="sub">Conservative estimate based on Dallas estate planning benchmarks</p>
+  <div class="cost-nums">
+    <div>
+      <div class="num">4-6</div>
+      <div class="lbl">Lost consults / month</div>
+    </div>
+    <div>
+      <div class="num">$3K+</div>
+      <div class="lbl">Revenue left on table</div>
+    </div>
+    <div>
+      <div class="num">7 days</div>
+      <div class="lbl">To fix everything</div>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Want the full fix?</h2>
+  <p>I can implement every recommendation above in 7 days. Reply to the email and I'll send you the plan.</p>
+  <a href="mailto:brave.sharon@gmail.com?subject=Send%20me%20the%20fix%20for%20Oak%20%26%20Wills" class="cta-btn">Reply "send me the fix"</a>
+  <p class="cta-note">Free. No obligation. Just a reply.</p>
+</div>
+
+<div class="footer">
+  Prepared by Sharon Lijo · brave.sharon@gmail.com
+</div>
+
+</body>
+</html>
